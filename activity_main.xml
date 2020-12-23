@@ -23,7 +23,7 @@
         android:id="@+id/btnWelcomeLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/creat_new_account"
+        android:text="@string/i_have_account"
         android:background="@color/colorRedButton"
         android:textColor="@android:color/white"
         android:layout_above="@id/btnWelcomeRegister"
@@ -36,7 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
-        android:text="@string/i_have_account"
+        android:text="@string/creat_new_account"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="50dp"
 

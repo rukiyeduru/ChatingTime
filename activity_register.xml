@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".RegisterActivity">
 
     <include layout="@layout/actionbar_app"
         android:id="@+id/actionbarRegister"/>
@@ -53,14 +53,6 @@
             android:layout_height="wrap_content"
             android:text="@string/creat_account"
             android:background="@color/colorPrimary"
-            android:textColor="@android:color/white"
-            android:layout_marginTop="10dp"/>
-        <Button
-            android:id="@+id/btnLoginRegister"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/mevcut_hesab_n_z_var_ise"
-            android:background="@color/colorAccent"
             android:textColor="@android:color/white"
             android:layout_marginTop="10dp"/>
 

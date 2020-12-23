@@ -37,7 +37,17 @@ public class RegisterActivity extends AppCompatActivity {
         txtEmail=(EditText) findViewById(R.id.txtEmailRegister);
         txtPassword=(EditText) findViewById(R.id.txtPassowrdRegister);
         btnRegister=(Button) findViewById(R.id.btnRegister);
-        btnLoginRegister=(Button) findViewById(R.id.btnLoginRegister);
+        
+
+    }
+
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_register);
+        init();
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,8 +55,8 @@ public class RegisterActivity extends AppCompatActivity {
                 createNewAccount();
             }
         });
-    }
 
+    }
     private void createNewAccount() {/*verileriçekiyoruz*/
         String username = txtUsername.getText().toString();
         String email = txtEmail.getText().toString();
@@ -82,12 +92,4 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
-        init();
-
-    }
 }
