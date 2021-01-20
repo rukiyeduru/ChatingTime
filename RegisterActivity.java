@@ -1,4 +1,4 @@
-package com.example.chatingtime;
+package com.example.chatapp1;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,80 +16,95 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 public class RegisterActivity extends AppCompatActivity {
-    private Toolbar actionbarRegister;
-    private EditText txtUsername, txtEmail,txtPassword;
-    private Button btnRegister,btnLoginRegister;
 
-    private FirebaseAuth auth;/*firebase de kontol edicez*/
-
-    public void init(){/*kontollerimizi oluşturmak için */
-
-        actionbarRegister=(Toolbar) findViewById(R.id.actionbarRegister);
-        setSupportActionBar(actionbarRegister);
-        getSupportActionBar().setTitle("Hesap Oluştur");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        auth=FirebaseAuth.getInstance();/*istediğimiz kontolü oluştuduk*/
-
-        txtUsername=(EditText) findViewById(R.id.txtUsernameRegister);
-        txtEmail=(EditText) findViewById(R.id.txtEmailRegister);
-        txtPassword=(EditText) findViewById(R.id.txtPassowrdRegister);
-        btnRegister=(Button) findViewById(R.id.btnRegister);
-        
-
-    }
-
+    FirebaseAuth auth;
+    DatabaseReference reference;
+    private EditText username,email,password;
+    private Button btn_register;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        init();
 
-        btnRegister.setOnClickListener(new View.OnClickListener() {
+        Toolbar toolbar=findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Kaydol");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+        username=findViewById(R.id.username);
+        email=findViewById(R.id.email);
+        password=findViewById(R.id.password);
+        btn_register=findViewById(R.id.btn_register);
+
+        auth=FirebaseAuth.getInstance();
+
+
+        btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createNewAccount();
+                String txt_username=username.getText().toString();
+                String txt_email=email.getText().toString();
+                String txt_password=password.getText().toString();
+
+                if (TextUtils.isEmpty(txt_username)|| TextUtils.isEmpty(txt_email)|| TextUtils.isEmpty(txt_password)){
+                    Toast.makeText(RegisterActivity.this,"Tüm Alanları Doldurunuz!",Toast.LENGTH_SHORT).show();
+
+                }else if (txt_password.length()<6){
+                    Toast.makeText(RegisterActivity.this,"Şifre en az 6 karakter olmalıdır!",Toast.LENGTH_SHORT).show();
+
+                }else {
+                    register(txt_username,txt_email,txt_password);
+                }
+            }
+        });
+
+
+    }
+
+
+
+    private void register(final String username, String email, String password){
+        auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+
+                if (task.isSuccessful()){
+                    FirebaseUser firebaseUser=auth.getCurrentUser();
+                    assert firebaseUser != null;
+                    String userid =auth.getCurrentUser().getUid();         /*12.video değişiklik      firebaseUser.getUid();*/
+
+                    reference= FirebaseDatabase.getInstance().getReference("Users").child(userid);
+                    HashMap<String,String> hashMap= new HashMap<>();
+                    hashMap.put("id",userid);
+                    hashMap.put("username", username);
+                    hashMap.put("imageURL","default");
+
+                    reference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isSuccessful()){
+                                Intent intent= new Intent(RegisterActivity.this,MainActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK| Intent.FLAG_ACTIVITY_CLEAR_TASK) ;/*12.video değişiklik*/
+                                startActivity(intent);
+                                finish();
+                            }
+                        }
+                    });
+                }else{
+                    Toast.makeText(RegisterActivity.this,"Bir Hata Oluştu !",Toast.LENGTH_LONG).show();
+                }
             }
         });
 
     }
-    private void createNewAccount() {/*verileriçekiyoruz*/
-        String username = txtUsername.getText().toString();
-        String email = txtEmail.getText().toString();
-        String password = txtPassword.getText().toString();
-        if(TextUtils.isEmpty(email)){
-
-            Toast.makeText(this,"Email Alanı Boş Olmaz!",Toast.LENGTH_LONG).show();
-
-        }else if(TextUtils.isEmpty(password)){
-            Toast.makeText(this,"Şifre Alanı Boş Olamaz!",Toast.LENGTH_LONG).show();
-
-        }else{
-
-            auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-
-                    if(task.isSuccessful())/*görev başarılı ise yan e mail ve şifre girildiyse*/ {
-
-                        Toast.makeText(RegisterActivity.this,"Hesap Oluşturdunuz !",Toast.LENGTH_LONG).show();
-                        Intent loginIntent = new Intent(RegisterActivity.this,LoginActivity.class);
-                        startActivity(loginIntent);
-                        finish();
-
-                    }else{
-                        Toast.makeText(RegisterActivity.this,"Bir Hata Oluştu !",Toast.LENGTH_LONG).show();
-                    }
-
-                }
-            });
-
-        }
-
-    }
-
 }

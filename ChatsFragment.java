@@ -1,4 +1,4 @@
-package com.example.chatingtime;
+package com.example.chatapp1.Fragments;
 
 import android.os.Bundle;
 
@@ -8,15 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.chatapp1.R;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class ChatsFragment extends Fragment {
-
-    public ChatsFragment() {
-        // Required empty public constructor
-    }
 
 
     @Override

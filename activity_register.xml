@@ -6,55 +6,56 @@
     android:layout_height="match_parent"
     tools:context=".RegisterActivity">
 
-    <include layout="@layout/actionbar_app"
-        android:id="@+id/actionbarRegister"/>
+
+    <include android:id="@+id/toolbar"
+        layout="@layout/bar_layout"/>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_below="@id/actionbarRegister"
-        android:padding="10dp">/*kontoller arasında 10 dp lik boşluk bırakıyor hepsinde tek tek yapzmak yerıne layoutta yazdım*/
+        android:gravity="center_horizontal"
+        android:layout_below="@+id/toolbar"
+        android:padding="16dp"
+        android:layout_height="wrap_content">
+
         <TextView
-            android:id="@+id/txtInfo1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/hesap_olu_tur"
-            android:textColor="@android:color/black"
+            android:text="HESAP OLUŞTUR"
             android:textSize="20sp"
-            />
+            android:textStyle="bold"/>
+
 
         <EditText
-            android:id="@+id/txtUsernameRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
-            android:hint="@string/kullan_c_ad" />
-
+            android:id="@+id/username"
+            android:layout_marginTop="10dp"
+            android:hint="Username"/>
         <EditText
-            android:id="@+id/txtEmailRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/e_mail"
+            android:id="@+id/email"
             android:inputType="textEmailAddress"
             android:layout_marginTop="10dp"
-            />
-
+            android:hint="Email"/>
         <EditText
-            android:id="@+id/txtPassowrdRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint= "@string/password"
+            android:id="@+id/password"
             android:inputType="textPassword"
             android:layout_marginTop="10dp"
-            />
+            android:hint="Password"/>
+
         <Button
-            android:id="@+id/btnRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/creat_account"
-            android:background="@color/colorPrimary"
-            android:textColor="@android:color/white"
-            android:layout_marginTop="10dp"/>
+            android:text="Kaydol"
+            android:id="@+id/btn_register"
+            android:background="@color/colorPrimaryDark"
+            android:layout_marginTop="10dp"
+            android:textColor="#ffff"/>
+
 
     </LinearLayout>
 </RelativeLayout>
