@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity">
+
+
+    <include android:id="@+id/toolbar"
+        layout="@layout/bar_layout"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_below="@+id/toolbar"
+        android:padding="16dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="GİRİŞ"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/email"
+            android:inputType="textEmailAddress"
+            android:layout_marginTop="10dp"
+            android:hint="Email"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/password"
+            android:inputType="textPassword"
+            android:layout_marginTop="10dp"
+            android:hint="Password"/>
+        <TextView
+            android:id="@+id/forget_passport_link"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Şifrenizi mi Unuttunuz?"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="23dp"
+            android:textAlignment="textEnd"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Giriş Yap"
+            android:id="@+id/btn_login"
+            android:background="@color/colorPrimaryDark"
+            android:layout_marginTop="10dp"
+            android:textColor="#ffff"/>
+        <TextView
+            android:id="@+id/need_new_account_link"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=" Yeni Hesaba mı İhtiyacınız var ?"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="23dp"
+            android:textAlignment="center"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
+            />
+        <TextView
+            android:id="@+id/login_using"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=" veya Kullanarak Giriş Yapın"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="23dp"
+            android:textAlignment="center"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            />
+
+        <Button
+            android:id="@+id/phone_login_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=" Telefon"
+            android:textSize="14sp"
+            android:drawableStart="@drawable/phone"
+            android:background="@color/colorPrimaryDark"
+            android:layout_marginTop="10dp"
+            android:textColor="#ffff"/>
+
+
+
+
+    </LinearLayout>
+</RelativeLayout>
